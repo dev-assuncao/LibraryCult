@@ -7,9 +7,9 @@ namespace LibraryCult.Models
 {
     public class Department
     {
-        public int IdDepartment { get; set; }
+        public int DepartmentId { get; set; }
         public string Name { get; set; }
-        public List<Employee> Employees { get; set; } = new List<Employee>();
+        public ICollection<Employee> Employees { get; set; } = new List<Employee>();
 
 
         public Department()
@@ -18,8 +18,24 @@ namespace LibraryCult.Models
 
         public Department(int idDepartment, string name)
         {
-            IdDepartment = idDepartment;
+            DepartmentId = idDepartment;
             Name = name;
         }
+
+        public void AddEmployee(Employee employee)
+        {
+            Employees.Add(employee);
+        }
+
+        public void RemoveEmployee(Employee employee)
+        {
+            Employees.Remove(employee);
+        }
+
+        /*
+        public double TotalEmployeesPerDepartment(int idDepartment)
+        {
+            return Employees.Where(x => x.Department == idDepartment);
+        }*/
     }
 }

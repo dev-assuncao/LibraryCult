@@ -7,19 +7,18 @@ namespace LibraryCult.Models
 {
     public class Employee
     {
-        public int IdEmployee { get; set; }
+        public int EmployeeId { get; set; }
         public string Name { get; set; }
         public DateTime BirthDate { get; set; }
         public double Salary { get; set; }
         public Department Department { get; set; }
-
         public Employee()
         {
         }
 
         public Employee(int idEmployee, string name, DateTime birthDate, double salary, Department department)
         {
-            IdEmployee = idEmployee;
+            EmployeeId = idEmployee;
             Name = name;
             BirthDate = birthDate;
             Salary = salary;
