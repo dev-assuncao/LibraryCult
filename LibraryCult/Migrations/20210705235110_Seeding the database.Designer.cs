@@ -9,8 +9,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace LibraryCult.Migrations
 {
     [DbContext(typeof(LibraryCultContext))]
-    [Migration("20210703150425_first")]
-    partial class first
+    [Migration("20210705235110_Seeding the database")]
+    partial class Seedingthedatabase
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -28,6 +28,9 @@ namespace LibraryCult.Migrations
                     b.Property<DateTime>("BirthDate")
                         .HasColumnType("datetime");
 
+                    b.Property<int?>("CategoryId")
+                        .HasColumnType("int");
+
                     b.Property<string>("Description")
                         .HasColumnType("text");
 
@@ -35,6 +38,8 @@ namespace LibraryCult.Migrations
                         .HasColumnType("text");
 
                     b.HasKey("AuthorId");
+
+                    b.HasIndex("CategoryId");
 
                     b.ToTable("Author");
                 });
@@ -51,7 +56,7 @@ namespace LibraryCult.Migrations
                     b.Property<int?>("AuthorId")
                         .HasColumnType("int");
 
-                    b.Property<int>("Category")
+                    b.Property<int?>("CategoryId")
                         .HasColumnType("int");
 
                     b.Property<string>("Language")
@@ -63,11 +68,33 @@ namespace LibraryCult.Migrations
                     b.Property<double>("Price")
                         .HasColumnType("double");
 
+                    b.Property<DateTime>("Release")
+                        .HasColumnType("datetime");
+
+                    b.Property<int>("Status")
+                        .HasColumnType("int");
+
                     b.HasKey("BookId");
 
                     b.HasIndex("AuthorId");
 
+                    b.HasIndex("CategoryId");
+
                     b.ToTable("Book");
+                });
+
+            modelBuilder.Entity("LibraryCult.Models.Category", b =>
+                {
+                    b.Property<int>("CategoryId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("text");
+
+                    b.HasKey("CategoryId");
+
+                    b.ToTable("Category");
                 });
 
             modelBuilder.Entity("LibraryCult.Models.Department", b =>
@@ -84,9 +111,9 @@ namespace LibraryCult.Migrations
                     b.ToTable("Department");
                 });
 
-            modelBuilder.Entity("LibraryCult.Models.Employee", b =>
+            modelBuilder.Entity("LibraryCult.Models.Seller", b =>
                 {
-                    b.Property<int>("EmployeeId")
+                    b.Property<int>("SellerId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
@@ -102,11 +129,20 @@ namespace LibraryCult.Migrations
                     b.Property<double>("Salary")
                         .HasColumnType("double");
 
-                    b.HasKey("EmployeeId");
+                    b.HasKey("SellerId");
 
                     b.HasIndex("DepartmentId");
 
-                    b.ToTable("Employee");
+                    b.ToTable("Seller");
+                });
+
+            modelBuilder.Entity("LibraryCult.Models.Author", b =>
+                {
+                    b.HasOne("LibraryCult.Models.Category", "Category")
+                        .WithMany()
+                        .HasForeignKey("CategoryId");
+
+                    b.Navigation("Category");
                 });
 
             modelBuilder.Entity("LibraryCult.Models.Book", b =>
@@ -115,13 +151,19 @@ namespace LibraryCult.Migrations
                         .WithMany("Books")
                         .HasForeignKey("AuthorId");
 
+                    b.HasOne("LibraryCult.Models.Category", "Category")
+                        .WithMany()
+                        .HasForeignKey("CategoryId");
+
                     b.Navigation("Author");
+
+                    b.Navigation("Category");
                 });
 
-            modelBuilder.Entity("LibraryCult.Models.Employee", b =>
+            modelBuilder.Entity("LibraryCult.Models.Seller", b =>
                 {
                     b.HasOne("LibraryCult.Models.Department", "Department")
-                        .WithMany("Employees")
+                        .WithMany("Sellers")
                         .HasForeignKey("DepartmentId");
 
                     b.Navigation("Department");
@@ -134,7 +176,7 @@ namespace LibraryCult.Migrations
 
             modelBuilder.Entity("LibraryCult.Models.Department", b =>
                 {
-                    b.Navigation("Employees");
+                    b.Navigation("Sellers");
                 });
 #pragma warning restore 612, 618
         }

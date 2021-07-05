@@ -5,24 +5,31 @@ using System.Threading.Tasks;
 
 namespace LibraryCult.Models
 {
-    public class Employee
+    public class Seller
     {
-        public int EmployeeId { get; set; }
+        public int SellerId { get; set; }
         public string Name { get; set; }
         public DateTime BirthDate { get; set; }
         public double Salary { get; set; }
         public Department Department { get; set; }
-        public Employee()
+        public Seller()
         {
         }
 
-        public Employee(int idEmployee, string name, DateTime birthDate, double salary, Department department)
+        public Seller(int idEmployee, string name, DateTime birthDate, double salary, Department department)
         {
-            EmployeeId = idEmployee;
+            SellerId = idEmployee;
             Name = name;
             BirthDate = birthDate;
             Salary = salary;
             Department = department;
         }
+
+        /*
+         public double TotalEmployeesPerDepartment(int idDepartment)
+         {
+            return Employees.Where(x => x.Department == idDepartment);
+         }*/
+
     }
 }

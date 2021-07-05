@@ -15,8 +15,10 @@ namespace LibraryCult.Data
 
         public DbSet<Author> Author { get; set; }
         public DbSet<Book> Book { get; set; }
+        public DbSet<Category> Category { get; set; }
         public DbSet<Department> Department { get; set; }
-        public DbSet<Employee> Employee { get; set; }
+        public DbSet<Seller> Seller { get; set; }
+
 
     }
 }

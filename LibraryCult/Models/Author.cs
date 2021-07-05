@@ -12,17 +12,19 @@ namespace LibraryCult.Models
         public DateTime BirthDate { get; set; }
         public string Description { get; set; }
         public ICollection<Book> Books { get; set; } = new List<Book>();
+        public Category Category { get; set; }
 
         public Author()
         {
         }
 
-        public Author(int idAuthor, string name, DateTime birthDate, string descrition)
+        public Author(int idAuthor, string name, DateTime birthDate, string descrition, Category category)
         {
             AuthorId = idAuthor;
             Name = name;
-            BirthDate = birthDate;
+            BirthDate = birthDate;           
             Description = descrition;
+            Category = category;
         }
 
         public int TotalBooks(string name)
