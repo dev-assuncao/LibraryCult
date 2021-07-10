@@ -31,5 +31,11 @@ namespace LibraryCult.Models
             Sellers.Remove(seller);
         }
 
+
+        public double TotalEmployeesPerDepartment(Department obj)
+        {
+            return Sellers.Where(x => x.Department == obj).ToList().Count();
+        }
+
     }
 }

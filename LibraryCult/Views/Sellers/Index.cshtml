@@ -1,0 +1,46 @@
+﻿@model IEnumerable<Seller>
+
+
+@{
+    ViewData["Title"] = "Sellers";
+}
+
+<h1>Details of all Sellers:</h1>
+
+<p>
+    <a asp-action="Create" btn type="button" class="btn btn-success   btn-sm"> Add new Seller </a>
+</p>
+
+<table class="table ">
+    <thead>
+        <tr>
+            <td>
+                @Html.DisplayNameFor(model => model.Name)
+            </td>
+            <td>
+                @Html.DisplayNameFor(model => model.BirthDate)
+            </td>
+            <td>
+                @Html.DisplayNameFor(model => model.Salary)
+            </td>
+            <td></td>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+        <tr>
+            <td>@Html.DisplayFor(modelItem => item.Name) </td>
+            <td>@Html.DisplayFor(modelItem => item.BirthDate) </td>
+            <td>@Html.DisplayFor(modelItem => item.Salary) </td>
+            <td>
+                <a asp-action="Edit" class="btn bg-primary text-white btn-sm" asp-route-id="@item.SellerId"> Edit </a>
+                <a asp-action="Details" class="btn bg-primary text-white btn-sm" asp-route-id="@item.SellerId"> Details</a>
+                <a asp-action="Delete" class="btn bg-primary text-white btn-sm" asp-route-id="@item.SellerId"> Delete </a>
+            </td>
+        </tr>
+        }
+    </tbody>
+</table>
+
+

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace LibraryCult.Controllers
 {
-    public class EmployeesController : Controller
+    public class CategorysController : Controller
     {
         public IActionResult Index()
         {

@@ -24,12 +24,5 @@ namespace LibraryCult.Models
             Salary = salary;
             Department = department;
         }
-
-        /*
-         public double TotalEmployeesPerDepartment(int idDepartment)
-         {
-            return Employees.Where(x => x.Department == idDepartment);
-         }*/
-
     }
 }
