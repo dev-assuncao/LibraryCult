@@ -12,6 +12,7 @@ namespace LibraryCult.Models
         public DateTime BirthDate { get; set; }
         public double Salary { get; set; }
         public Department Department { get; set; }
+
         public Seller()
         {
         }

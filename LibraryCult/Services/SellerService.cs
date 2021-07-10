@@ -20,5 +20,16 @@ namespace LibraryCult.Services
         {
             return _context.Seller.ToList();
         }
+
+        public void Insert(Seller obj)
+        {
+            if (!(obj is Seller))
+            {
+                return;//exception
+            }
+
+            _context.Add(obj);
+            _context.SaveChanges();
+        }
     }
 }
