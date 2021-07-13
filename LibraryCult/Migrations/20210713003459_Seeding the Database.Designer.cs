@@ -9,8 +9,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace LibraryCult.Migrations
 {
     [DbContext(typeof(LibraryCultContext))]
-    [Migration("20210705235110_Seeding the database")]
-    partial class Seedingthedatabase
+    [Migration("20210713003459_Seeding the Database")]
+    partial class SeedingtheDatabase
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {

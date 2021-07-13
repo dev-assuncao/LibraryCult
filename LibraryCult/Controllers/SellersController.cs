@@ -49,5 +49,47 @@ namespace LibraryCult.Controllers
             _sellerService.Insert(seller);
             return RedirectToAction(nameof(Index));
         }
+
+
+        public IActionResult Edit(int? id)
+        {
+            if(id == null)
+            {
+                return RedirectToAction(nameof(ErrorViewModel), new { message = "Id not provided" });
+            }
+
+            var result = _sellerService.FindPerId(id.Value);
+
+            if (result == null)
+            {
+                return RedirectToAction(nameof(ErrorViewModel), new { message = "Id not found" });
+            }
+
+            List<Department> departments = _departmentService.FindAllDp();
+            SellerFormViewModel viewModel = new SellerFormViewModel { Seller = result, Departments = departments };
+
+            return View(viewModel);
+        }
+
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult Edit(int? id, Seller seller)
+        {
+            if(!ModelState.IsValid)
+            {
+                var departments = _departmentService.FindAllDp();
+                var viewModel = new SellerFormViewModel { Departments = departments, Seller = seller };
+                return View(viewModel);
+            }
+
+            if (id.Value != seller.SellerId)
+            {
+                return RedirectToAction(nameof(ErrorViewModel), new { message = "Id not correspondind" });
+            }
+
+            _sellerService.Update(seller);
+            return RedirectToAction(nameof(Index));
+        }
     }
 }

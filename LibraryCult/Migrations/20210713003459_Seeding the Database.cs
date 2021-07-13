@@ -4,7 +4,7 @@ using MySql.EntityFrameworkCore.Metadata;
 
 namespace LibraryCult.Migrations
 {
-    public partial class Seedingthedatabase : Migration
+    public partial class SeedingtheDatabase : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {

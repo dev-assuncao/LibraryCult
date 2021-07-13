@@ -1,0 +1,44 @@
+﻿@model LibraryCult.Models.ViewModels.SellerFormViewModel
+
+
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h1>Editing seller: @Model.Seller.Name. </h1>
+
+<div class="row">
+    <div class="row-cols-md-3">
+        <form asp-action="Edit" method="post">
+            <input type="hidden" asp-for="Seller.SellerId" />
+            <div class="form-group">
+                <label asp-for="Seller.Name" class="control-label"></label>
+                <input asp-for="Seller.Name" class="form-control" />
+                <span asp-validation-for="Seller.Name" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Seller.BirthDate" class="control-label"></label>
+                <input asp-for="Seller.BirthDate" class="form-control" />
+                <span asp-validation-for="Seller.BirthDate" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Seller.Salary" class="control-label"></label>
+                <input asp-for="Seller.Salary" class="form-control" />
+                <span asp-validation-for="Seller.Salary" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Seller.Department" class="control-label"></label>
+                <select asp-for="Seller.Department" asp-items="@(new SelectList(Model.Departments, "DepartmentId","Name"))" class="form-control"></select>
+            </div>
+            <br />
+            <div class="form-group">
+                <input type="submit" value="Submit"  class="btn bg-primary text-white"/>
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    @{ await Html.PartialAsync("_ValidationScriptsPartial");}
+}
