@@ -9,7 +9,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace LibraryCult.Migrations
 {
     [DbContext(typeof(LibraryCultContext))]
-    [Migration("20210713003459_Seeding the Database")]
+    [Migration("20210713234433_SeedingtheDatabase")]
     partial class SeedingtheDatabase
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -120,7 +120,7 @@ namespace LibraryCult.Migrations
                     b.Property<DateTime>("BirthDate")
                         .HasColumnType("datetime");
 
-                    b.Property<int?>("DepartmentId")
+                    b.Property<int>("DepartmentId")
                         .HasColumnType("int");
 
                     b.Property<string>("Name")
@@ -164,7 +164,9 @@ namespace LibraryCult.Migrations
                 {
                     b.HasOne("LibraryCult.Models.Department", "Department")
                         .WithMany("Sellers")
-                        .HasForeignKey("DepartmentId");
+                        .HasForeignKey("DepartmentId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("Department");
                 });

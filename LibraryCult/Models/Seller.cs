@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace LibraryCult.Models
 {
@@ -15,7 +16,13 @@ namespace LibraryCult.Models
         [DisplayFormat(DataFormatString = "{0:MM/dd/yyyy}")]
         public DateTime BirthDate { get; set; }
         public double Salary { get; set; }
+
         public Department Department { get; set; }
+
+        [ForeignKey("Department")]
+        public int DepartmentId { get; set; }
+
+
 
         public Seller()
         {
