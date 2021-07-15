@@ -1,0 +1,44 @@
+﻿@model LibraryCult.Models.Seller
+
+@{
+    ViewData["Title"] = "Delete";
+}
+
+<hr />
+<h2>Do you want delete this seller?</h2>
+
+<div class="">
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Name)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.BirthDate)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.BirthDate)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Salary)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Salary)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Department)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Department.Name)
+        </dd>
+    </dl>
+
+    <hr />
+
+    <form asp-action="Delete" method="post">
+        <input type="submit" class="btn-danger text-white" value="Delete" />
+    </form>   
+</div>
+

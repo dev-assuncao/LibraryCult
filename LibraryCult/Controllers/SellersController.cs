@@ -91,5 +91,58 @@ namespace LibraryCult.Controllers
             _sellerService.Update(seller);
             return RedirectToAction(nameof(Index));
         }
+
+
+        public IActionResult Details(int? id)
+        {
+            if (id == null)
+            {
+                return RedirectToAction(nameof(ErrorViewModel), new { message = "id is null"});
+            }
+
+            var result = _sellerService.FindPerId(id.Value);
+
+            if (result == null)
+            {
+                RedirectToAction(nameof(ErrorViewModel), new { message = "Seller not found" });
+            }
+
+            return View(result);
+        }
+
+
+        public IActionResult Delete(int? id)
+        {
+            if (id == null)
+            {
+                return RedirectToAction(nameof(ErrorViewModel), new { message = "Id not found" });
+            }
+
+            var result = _sellerService.FindPerId(id.Value);
+
+            if (result == null)
+            {
+                return RedirectToAction(nameof(ErrorViewModel), new { message = "Seller not found" });
+            }
+
+            return View(result);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult Delete(int id)
+        {
+
+            var result = _sellerService.FindPerId(id);
+
+            if (result == null)
+            {
+                return RedirectToAction(nameof(ErrorViewModel));
+            }
+
+            _sellerService.Remove(id);
+
+            return RedirectToAction(nameof(Index));
+        }
     }
 }

@@ -19,6 +19,7 @@ namespace LibraryCult.Models
 
         public Department Department { get; set; }
 
+        [Display(Name = "Department")]
         [ForeignKey("Department")]
         public int DepartmentId { get; set; }
 

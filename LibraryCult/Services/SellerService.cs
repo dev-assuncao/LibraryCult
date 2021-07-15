@@ -49,5 +49,18 @@ namespace LibraryCult.Services
             _context.Update(obj);
             _context.SaveChanges();
         }
+
+        public void Remove(int id)
+        {
+            var obj = _context.Seller.Find(id);
+
+            /*if (!hasAny)
+            {
+                throw new Exception("Seller not found");
+            }*/
+
+            _context.Seller.Remove(obj);
+            _context.SaveChanges();
+        }
     }
 }
