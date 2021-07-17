@@ -1,0 +1,76 @@
+﻿@model LibraryCult.Models.ViewModels.BookFormViewModel
+
+
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+
+</head>
+<body>
+    <h1> Editing book @Model.Book.Name</h1>
+
+    <div class="row">
+        <div class="row-cols-3">
+            <form asp-action="Edit" method="post">
+                <div class="form-group">
+                    <label asp-for="Book.Name" class="control-label"></label>
+                    <input asp-for="Book.Name" class="form-control" />
+                    <span asp-validation-for="Book.Name" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Book.CategoryId" class="control-label"></label>
+                    <select asp-for="Book.CategoryId" asp-items="@(new SelectList(Model.Categorys, "CategoryId","Name"))" class="form-control"> </select>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Book.Release" class="control-label"></label>
+                    <input asp-for="Book.Release" class="form-control" />
+                    <span asp-validation-for="Book.Release" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Book.Author" class="control-label"></label>
+                    <input asp-for="Book.Author.Name" class="form-control" />
+                    <span asp-validation-for="Book.Author" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Book.Language" class="control-label"></label>
+                    <input asp-for="Book.Language" class="form-control" />
+                    <span asp-validation-for="Book.Language" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Book.Amount" class="control-label"></label>
+                    <input asp-for="Book.Amount" class="form-control" />
+                    <span asp-validation-for="Book.Amount" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Book.Price" class="control-label"></label>
+                    <input asp-for="Book.Price" class="form-control" />
+                    <span asp-validation-for="Book.Price" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Book.Status" class="control-label"></label>
+                    <input asp-for="Book.Status" class="form-control" />
+                    <span asp-validation-for="Book.Status" class="text-danger"></span>
+                </div>
+            </form>
+        </div>
+    </div>
+
+
+
+
+
+
+</body>
+
+
+
+
+
+
+</html>
+

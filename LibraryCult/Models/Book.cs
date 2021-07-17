@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using LibraryCult.Models.Enums;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+
 
 
 namespace LibraryCult.Models
@@ -19,7 +22,9 @@ namespace LibraryCult.Models
         public double Price { get; set; }
         public Status Status { get; set; }
 
-
+        [Display(Name = "Category")]
+        [ForeignKey("Category")]
+        public int CategoryId { get; set; }
         public Book()
         {
         }

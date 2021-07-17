@@ -5,11 +5,14 @@
     ViewData["Title"] = "Sellers";
 }
 
-<h1>Sellers:</h1>
+<h1>Sellers</h1>
 
+<hr />
 <p>
     <a asp-action="Create" btn type="button" class="btn btn-success   btn-sm"> Add new Seller </a>
 </p>
+
+<br/>
 
 <table class="table ">
     <thead>
@@ -29,18 +32,23 @@
     <tbody>
         @foreach (var item in Model)
         {
-        <tr>
-            <td>@Html.DisplayFor(modelItem => item.Name) </td>
-            <td>@Html.DisplayFor(modelItem => item.BirthDate) </td>
-            <td>@Html.DisplayFor(modelItem => item.Salary) </td>
-            <td>
-                <a asp-action="Edit" class="btn bg-primary text-white btn-sm" asp-route-id="@item.SellerId"> Edit </a>
-                <a asp-action="Details" class="btn bg-primary text-white btn-sm" asp-route-id="@item.SellerId"> Details</a>
-                <a asp-action="Delete" class="btn bg-primary text-white btn-sm" asp-route-id="@item.SellerId"> Delete </a>
-            </td>
-        </tr>
+            <tr>
+                <td>@Html.DisplayFor(modelItem => item.Name) </td>
+                <td>@Html.DisplayFor(modelItem => item.BirthDate) </td>
+                <td>@Html.DisplayFor(modelItem => item.Salary) </td>
+                <td>
+                    <a asp-action="Edit" class="btn bg-primary text-white btn-sm" asp-route-id="@item.SellerId"> Edit </a>
+                    <a asp-action="Details" class="btn bg-primary text-white btn-sm" asp-route-id="@item.SellerId"> Details</a>
+                    <a asp-action="Delete" class="btn bg-primary text-white btn-sm" asp-route-id="@item.SellerId"> Delete </a>
+                </td>
+            </tr>
         }
     </tbody>
 </table>
+
+@section Scripts {
+    @{ await Html.PartialAsync("_ValidationScriptsPartial");}
+}
+
 
 
