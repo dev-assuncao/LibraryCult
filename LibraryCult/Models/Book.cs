@@ -15,6 +15,9 @@ namespace LibraryCult.Models
         public int BookId { get; set; }
         public string Name { get; set; }
         public Category Category { get; set; }
+
+        [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:MM/dd/yyyy}")]
         public DateTime Release { get; set; }
         public Author Author { get; set; }
         public string Language { get; set; }
@@ -25,6 +28,10 @@ namespace LibraryCult.Models
         [Display(Name = "Category")]
         [ForeignKey("Category")]
         public int CategoryId { get; set; }
+
+        [Display(Name = "Author")]
+        [ForeignKey("Author")]
+        public int AuthorId { get; set; }
         public Book()
         {
         }

@@ -31,10 +31,32 @@ namespace LibraryCult.Controllers
         }
 
 
+        [HttpGet]
         public IActionResult Create()
         {
-            return View();
+            var category = _categoryService.AllCategory();
+            var bookForm = new BookFormViewModel { Categorys = category };
+            return View(bookForm);
         }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult Create(Book book)
+        {
+            if(!ModelState.IsValid)
+            { 
+                var category = _categoryService.AllCategory();
+                BookFormViewModel bookForm = new BookFormViewModel { Book = book, Categorys = category};
+            }
+
+            _bookService.InsertBook(book);
+
+            return RedirectToAction(nameof(Index));
+
+        }
+
+
+
 
         public IActionResult Edit(int? id)
         {

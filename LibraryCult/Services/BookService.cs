@@ -27,5 +27,18 @@ namespace LibraryCult.Services
         {
             return _context.Book.Include(obj => obj.Author).FirstOrDefault(obj => obj.BookId == id);
         }
+
+        public void InsertBook(Book book)
+        {
+            bool hasBook = _context.Book.Any(x => x.BookId == book.BookId);
+
+            if (hasBook)
+            {
+                throw new Exception("Database has this item");
+            }
+
+            _context.Book.Add(book);
+            _context.SaveChanges();
+        }
     }
 }
