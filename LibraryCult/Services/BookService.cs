@@ -40,5 +40,28 @@ namespace LibraryCult.Services
             _context.Book.Add(book);
             _context.SaveChanges();
         }
+
+        public void UpdateBook(Book book)
+        {
+            bool hasBook = _context.Book.Any(x => x.BookId == book.BookId);
+
+            if (!hasBook)
+            {
+                throw new Exception("Book not found");
+            }
+
+            _context.Update(book);
+            _context.SaveChanges();
+        }
+
+
+        public void RemoveBook(int id)
+        {
+            var obj = _context.Book.Find(id);
+
+
+            _context.Book.Remove(obj);
+            _context.SaveChanges();
+        }
     }
 }
