@@ -1,0 +1,69 @@
+﻿@model LibraryCult.Models.ViewModels.BookFormViewModel
+
+
+@{
+    ViewData["Title"] = "Delete";
+}
+
+<h1>Delete</h1>
+
+<h3> Would do you like delete this Book? </h3>
+<hr/>
+<div class="row-cols-1">
+    <dl class="d-lg-table">
+        <dt>
+            @Html.DisplayNameFor(model => model.Book.Name)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Book.Name)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Book.Category)
+        </dt>
+        <dd>
+            @Html.DisplayFor(Model => Model.Book.Category.Name)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Book.Release)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Book.Release)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Book.Author)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Book.Author.Name)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Book.Language)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Book.Language)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Book.Amount)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Book.Amount)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Book.Price)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Book.Price)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Book.Status)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Book.Status)
+        </dd>
+    </dl>
+</div>
+    <div >
+        <form asp-action="Delete" method="post">
+            <input type="submit" class="btn text-white bg-danger" value="Delete" />
+        </form>
+    </div>
+

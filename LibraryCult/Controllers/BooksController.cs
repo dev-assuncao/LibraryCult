@@ -99,5 +99,57 @@ namespace LibraryCult.Controllers
             _bookService.UpdateBook(book);
             return RedirectToAction(nameof(Index));
         }
+
+
+        public IActionResult Details (int id)
+        {
+           var result = _bookService.FindBookId(id);
+
+            if (result == null)
+            {
+                return RedirectToAction(nameof(Index));
+            }
+
+            return View(result);
+        }
+
+
+
+        [HttpGet]
+        public IActionResult Delete (int? id)
+        {
+            if (id == null)
+            {
+                throw new Exception("Id is null");
+            }
+
+            var result = _bookService.FindBookId(id.Value);
+
+            if (result == null)
+            {
+                throw new Exception("Book not found");
+            }
+
+            var categorys = _categoryService.AllCategory();
+            var viewModel = new BookFormViewModel { Book = result, Categorys = categorys };
+
+            return View(viewModel);     
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult Delete(int id)
+        {
+            var result = _bookService.FindBookId(id);
+
+            if (result == null)
+            {
+                throw new Exception("book not found");
+            }
+
+            _bookService.RemoveBook(id);
+
+            return RedirectToAction(nameof(Index));
+        }
     }
 }
