@@ -110,7 +110,11 @@ namespace LibraryCult.Controllers
                 return RedirectToAction(nameof(Index));
             }
 
-            return View(result);
+            var category = _categoryService.AllCategory();
+
+            var viewModel = new BookFormViewModel { Book = result, Categorys = category };
+
+            return View(viewModel);
         }
 
 

@@ -39,3 +39,4 @@ namespace LibraryCult.Models
 
     }
 }
+        //< input type = "submit" asp - route - id = "" class= "btn btn-md bg-primary text-white" value = "Search" />

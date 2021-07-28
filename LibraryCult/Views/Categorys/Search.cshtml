@@ -1,0 +1,46 @@
+﻿@model LibraryCult.Models.ViewModels.CategoryFormViewModel
+
+
+@{
+    ViewData["Title"] = "Search";
+}
+
+<h1>@ViewData["Title"]</h1>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>@Html.DisplayNameFor(model => model.book.Name) </th>
+
+            <th>@Html.DisplayNameFor(model => model.book.Category)</th>
+
+            <th>@Html.DisplayNameFor(model => model.book.Release)</th>
+
+            <th>@Html.DisplayNameFor(model => model.book.Author)</th>
+ 
+            <th>@Html.DisplayNameFor(model => model.book.Price)</th>
+     
+            <th>@Html.DisplayNameFor(model => model.book.Status)</th>
+        </tr>
+    </thead>
+
+    <tbody>
+        @foreach (Book book in Model.Books)
+        {
+            <tr>
+                <td>@Html.DisplayFor(model => book.Name)</td>
+
+                <td>@Html.DisplayFor(model => book.Category.Name)</td>
+
+                <td>@Html.DisplayFor(model => book.Release)</td>
+
+                <td>@Html.DisplayFor(model => book.Author.Name)</td>
+
+                <td>@Html.DisplayFor(model => book.Price)</td>
+
+                <td>@Html.DisplayFor(model => book.Status)</td>
+            </tr>
+        }
+    </tbody>
+</table>
+    <a asp-action="Index" class="btn btn-sm bg-primary text-white"> Back </a>

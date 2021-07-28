@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using LibraryCult.Data;
 using LibraryCult.Models;
+using Microsoft.AspNetCore.Mvc;
 
 namespace LibraryCult.Services
 {
@@ -21,5 +22,11 @@ namespace LibraryCult.Services
             return _context.Category.ToList();
         }
 
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ICollection<Book> PerCategory(int categoryId)
+        {
+            return _context.Book.Where(x => x.Category.CategoryId == categoryId).ToList();
+        }
     }
 }
