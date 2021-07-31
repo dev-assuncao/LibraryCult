@@ -7,7 +7,7 @@ namespace LibraryCult.Models.ViewModels
 {
     public class CategoryFormViewModel
     {
-        public Book book { get; set; }
+        public Book Book { get; set; }
         public ICollection<Book> Books { get; set; }
     }
 }

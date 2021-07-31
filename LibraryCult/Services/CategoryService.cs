@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using LibraryCult.Data;
 using LibraryCult.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace LibraryCult.Services
 {
@@ -12,7 +13,7 @@ namespace LibraryCult.Services
     {
         private readonly LibraryCultContext _context;
 
-        public CategoryService (LibraryCultContext context)
+        public CategoryService(LibraryCultContext context)
         {
             _context = context;
         }
@@ -26,7 +27,11 @@ namespace LibraryCult.Services
         [ValidateAntiForgeryToken]
         public ICollection<Book> PerCategory(int categoryId)
         {
-            return _context.Book.Where(x => x.Category.CategoryId == categoryId).ToList();
+            var result = from obj in _context.Book select obj;
+
+            return result.Include(x => x.Category)
+                .Include(x => x.Author)
+                .Where(x => x.CategoryId == categoryId).ToList();
         }
     }
 }

@@ -7,6 +7,7 @@ using LibraryCult.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Mvc;
 using System.Web;
+using LibraryCult.Services.Exceptions;
 
 namespace LibraryCult.Services
 {
@@ -35,11 +36,18 @@ namespace LibraryCult.Services
 
             if (hasBook)
             {
-                throw new Exception("Database has this item");
+                throw new DbConcurencyException("Database has this item");
             }
 
-            _context.Book.Add(book);
-            _context.SaveChanges();
+            try
+            {
+                _context.Book.Add(book);
+                _context.SaveChanges();
+            }
+            catch(DbConcurencyException e)
+            {
+                throw new DbConcurencyException(e.Message);
+            }
         }
 
         public void UpdateBook(Book book)

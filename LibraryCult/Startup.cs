@@ -32,6 +32,7 @@ namespace LibraryCult
             services.AddScoped<DepartmentService>();
             services.AddScoped<BookService>();
             services.AddScoped<CategoryService>();
+            services.AddScoped<AuthorService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
