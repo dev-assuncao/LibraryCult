@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace LibraryCult.Models
 {
@@ -9,6 +11,9 @@ namespace LibraryCult.Models
     {
         public int AuthorId { get; set; }
         public string Name { get; set; }
+
+        [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:MM/dd/yyyy}")]
         public DateTime BirthDate { get; set; }
         public string Description { get; set; }
         public ICollection<Book> Books { get; set; } = new List<Book>();

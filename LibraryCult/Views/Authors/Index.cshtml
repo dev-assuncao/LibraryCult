@@ -8,32 +8,37 @@
 
 <h1>@ViewData["Title"]</h1>
 
+<div class="row-cols-lg-auto">
 
-<table class="table">
-    <thead>
-        <tr>
-            <th class="text-center"> @Html.DisplayNameFor(model => model.Name) </th>
-            <th class="text-center"> @Html.DisplayNameFor(model => model.BirthDate) </th>
-            <th class="text-center"> @Html.DisplayNameFor(model => model.Description)</th>
-            <th class="text-center"> @Html.DisplayNameFor(model => model.Category) </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (Author obj in Model)
-        {
+
+    <table class="table">
+        <thead>
             <tr>
-                <td>@Html.DisplayFor(model => obj.Name)</td>
-                <td>@Html.DisplayFor(model => obj.BirthDate)</td>
-                <td>@Html.DisplayFor(model => obj.Description)</td>
-                <td>@Html.DisplayFor(model => obj.Category.Name)</td>
-
-                <td>
-                    <a asp-action="Edit" class="btn bg-primary text-white" asp-route-id="@obj.AuthorId"> Edit </a>
-                    <a asp-action="Details" class="btn bg-primary text-white" asp-route-id="@obj.AuthorId"> Details </a>
-                </td>
+                <th> @Html.DisplayNameFor(model => model.Name) </th>
+                <th> @Html.DisplayNameFor(model => model.BirthDate) </th>
+                <th class="text-center"> @Html.DisplayNameFor(model => model.Description)</th>
+                <th> @Html.DisplayNameFor(model => model.Category) </th>
+                <th></th>
+                <td> </td>
             </tr>
-        }
-    </tbody>
-</table>
+        </thead>
+        <tbody>
+            @foreach (Author obj in Model)
+            {
+                <tr>
+                    <td>@Html.DisplayFor(model => obj.Name)</td>
+                    <td>@Html.DisplayFor(model => obj.BirthDate)</td>
+                    <td class="text-center">@Html.DisplayFor(model => obj.Description)</td>
+                    <td>@Html.DisplayFor(model => obj.Category.Name)</td>
 
+                    <td>
+                        <a asp-action="Edit" class="btn btn-sm bg-primary text-white" asp-route-id="@obj.AuthorId"> Edit </a>
+                    </td>
+                    <td>
+                        <a asp-action="Details" class="btn btn-sm  bg-primary text-white" asp-route-id="@obj.AuthorId"> Details </a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

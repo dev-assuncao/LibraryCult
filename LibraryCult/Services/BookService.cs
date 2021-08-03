@@ -72,5 +72,6 @@ namespace LibraryCult.Services
             _context.Book.Remove(obj);
             _context.SaveChanges();
         }
+
     }
 }

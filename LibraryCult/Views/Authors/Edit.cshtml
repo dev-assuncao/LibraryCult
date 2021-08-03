@@ -1,4 +1,4 @@
-﻿
+﻿@model LibraryCult.Models.ViewModels.AuthorViewModel
 
 @{
     ViewData["Title"] = "Title";
@@ -7,3 +7,13 @@
 
 
 <h1>Edit</h1>
+
+<div class="rows">
+    <form asp-for="Details" method="post">
+        <div class="form-control">
+            <label asp-for="Author.Name" class="control-label"></label>
+            <input asp-for="Author.Name" class="form-control" />
+            <span asp-validation-for="Author.Name" class="text-danger"></span>
+        </div>
+    </form>
+</div>

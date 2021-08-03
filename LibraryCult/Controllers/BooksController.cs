@@ -14,11 +14,13 @@ namespace LibraryCult.Controllers
 
         private readonly BookService _bookService;
         private readonly CategoryService _categoryService;
+        private readonly AuthorService _authorService;
 
-        public BooksController(BookService book, CategoryService category)
+        public BooksController(BookService book, CategoryService category, AuthorService author)
         {
             _bookService = book;
             _categoryService = category;
+            _authorService = author;
         }
 
 
@@ -51,8 +53,16 @@ namespace LibraryCult.Controllers
 
             _bookService.InsertBook(book);
 
-            return RedirectToAction(nameof(Index));
+            var hasAuthor = _authorService.HasAuthor(book.AuthorId);
 
+            if (hasAuthor)
+            {
+                return RedirectToAction("Edit", "AuthorsController", book.AuthorId);
+            }
+            else
+            {
+                return RedirectToAction(nameof(Index));
+            }
         }
 
 
