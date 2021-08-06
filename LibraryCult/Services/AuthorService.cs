@@ -36,5 +36,18 @@ namespace LibraryCult.Services
         {
             return _context.Author.Any(x => x.AuthorId == id);
         }
+
+        public void UpdateAuthor(Author author)
+        {
+            var anyAuthor = _context.Author.Any(x => x.AuthorId == author.AuthorId);
+
+            if (!anyAuthor)
+            {
+                throw new Exception("Author not found");
+            }
+
+            _context.Update(author);
+            _context.SaveChanges();
+        }
     }
 }

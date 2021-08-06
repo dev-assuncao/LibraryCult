@@ -57,7 +57,9 @@ namespace LibraryCult.Controllers
 
             if (hasAuthor)
             {
-                return RedirectToAction("Edit", "AuthorsController", book.AuthorId);
+                //return RedirectToAction("Edit", new RouteValueDictionary(new { Controller = "AuthorsController", Action = "Edit", book.AuthorId }));
+
+                return RedirectToAction("Edit", "AuthorsController", new { id = book.AuthorId });
             }
             else
             {

@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using LibraryCult.Services.Exceptions;
 using LibraryCult.Services;
 using LibraryCult.Models.ViewModels;
+using LibraryCult.Models;
 
 namespace LibraryCult.Controllers
 {
@@ -40,11 +41,31 @@ namespace LibraryCult.Controllers
                 throw new NotFoundException("Author not found");
             }
 
-            var viewModel = new AuthorViewModel { Author = find };
+            var categories = _categoryService.AllCategory();
+
+            var viewModel = new AuthorViewModel { Author = find, Categories = categories};
 
 
             return View(viewModel);
         }
+
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult Edit(int? id, Author author)
+        {
+            if (!ModelState.IsValid)
+            {
+                var categories = _categoryService.AllCategory();
+                var viewModel = new AuthorViewModel { Author = author, Categories = categories };
+                return View(viewModel);
+            }
+
+            _authorService.UpdateAuthor(author);
+            return RedirectToAction(nameof(Index));
+        }
+
+
 
 
         public IActionResult Details(int id)
