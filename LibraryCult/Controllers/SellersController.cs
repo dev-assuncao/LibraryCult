@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using LibraryCult.Models;
 using LibraryCult.Models.ViewModels;
 using LibraryCult.Services;
+using System.Diagnostics;
 
 namespace LibraryCult.Controllers
 {
@@ -15,7 +16,7 @@ namespace LibraryCult.Controllers
         private readonly SellerService _sellerService;
         private readonly DepartmentService _departmentService;
 
-        public SellersController (SellerService sellerService, DepartmentService departmentService)
+        public SellersController(SellerService sellerService, DepartmentService departmentService)
         {
             _sellerService = sellerService;
             _departmentService = departmentService;
@@ -53,16 +54,16 @@ namespace LibraryCult.Controllers
 
         public IActionResult Edit(int? id)
         {
-            if(id == null)
+            if (id == null)
             {
-                return RedirectToAction(nameof(ErrorViewModel), new { message = "Id not provided" });
+                return RedirectToAction(nameof(Error), new { message = "Id not provided." });
             }
 
             var result = _sellerService.FindPerId(id.Value);
 
             if (result == null)
             {
-                return RedirectToAction(nameof(ErrorViewModel), new { message = "Id not found" });
+                return RedirectToAction(nameof(Error), new { message = "Seller not found." });
             }
 
             List<Department> departments = _departmentService.FindAllDp();
@@ -76,7 +77,7 @@ namespace LibraryCult.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult Edit(int? id, Seller seller)
         {
-            if(!ModelState.IsValid)
+            if (!ModelState.IsValid)
             {
                 var departments = _departmentService.FindAllDp();
                 var viewModel = new SellerFormViewModel { Departments = departments, Seller = seller };
@@ -85,7 +86,7 @@ namespace LibraryCult.Controllers
 
             if (id.Value != seller.SellerId)
             {
-                return RedirectToAction(nameof(ErrorViewModel), new { message = "Id not correspondind" });
+                return RedirectToAction(nameof(Error), new { message = "Id mismatch" });
             }
 
             _sellerService.Update(seller);
@@ -97,14 +98,14 @@ namespace LibraryCult.Controllers
         {
             if (id == null)
             {
-                return RedirectToAction(nameof(ErrorViewModel), new { message = "id is null"});
+                return RedirectToAction(nameof(Error), new { message = "id not provided" });
             }
 
             var result = _sellerService.FindPerId(id.Value);
 
             if (result == null)
             {
-                RedirectToAction(nameof(ErrorViewModel), new { message = "Seller not found" });
+                RedirectToAction(nameof(Error), new { message = "Seller not found" });
             }
 
             return View(result);
@@ -115,14 +116,14 @@ namespace LibraryCult.Controllers
         {
             if (id == null)
             {
-                return RedirectToAction(nameof(ErrorViewModel), new { message = "Id not found" });
+                return RedirectToAction(nameof(Error), new { message = "Id not provided" });
             }
 
             var result = _sellerService.FindPerId(id.Value);
 
             if (result == null)
             {
-                return RedirectToAction(nameof(ErrorViewModel), new { message = "Seller not found" });
+                return RedirectToAction(nameof(Error), new { message = "Seller not found" });
             }
 
             return View(result);
@@ -137,12 +138,24 @@ namespace LibraryCult.Controllers
 
             if (result == null)
             {
-                return RedirectToAction(nameof(ErrorViewModel));
+                return RedirectToAction(nameof(Error), new { message = "Id not found" });
             }
 
             _sellerService.Remove(id);
 
             return RedirectToAction(nameof(Index));
+        }
+
+
+        public IActionResult Error(string message)
+        {
+            var viewModel = new ErrorViewModel
+            {
+                Message = message,
+                RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier
+            };
+
+            return View(viewModel);
         }
     }
 }

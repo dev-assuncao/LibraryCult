@@ -7,6 +7,7 @@ using LibraryCult.Services.Exceptions;
 using LibraryCult.Services;
 using LibraryCult.Models.ViewModels;
 using LibraryCult.Models;
+using System.Diagnostics;
 
 namespace LibraryCult.Controllers
 {
@@ -38,7 +39,7 @@ namespace LibraryCult.Controllers
 
             if (find == null)
             {
-                throw new NotFoundException("Author not found");
+                return RedirectToAction(nameof(Error), new { message = "Author not found" });
             }
 
             var categories = _categoryService.AllCategory();
@@ -74,7 +75,7 @@ namespace LibraryCult.Controllers
 
             if (find == null)
             {
-                throw new NotFoundException("Author not found");
+                return RedirectToAction(nameof(Error), new { message = "Author not found" });
             }
 
             var category = _categoryService.AllCategory();
@@ -85,5 +86,11 @@ namespace LibraryCult.Controllers
             return View(viewModel);
         }
 
+
+        public IActionResult Error (string message)
+        {
+            var viewModel = new ErrorViewModel { Message = message, RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier };
+            return View(viewModel);
+        }
     }
 }

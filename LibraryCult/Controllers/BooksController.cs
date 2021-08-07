@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using LibraryCult.Services;
 using LibraryCult.Models.ViewModels;
 using LibraryCult.Models;
+using System.Diagnostics;
 
 namespace LibraryCult.Controllers
 {
@@ -59,7 +60,9 @@ namespace LibraryCult.Controllers
             {
                 //return RedirectToAction("Edit", new RouteValueDictionary(new { Controller = "AuthorsController", Action = "Edit", book.AuthorId }));
 
-                return RedirectToAction("Edit", "AuthorsController", new { id = book.AuthorId });
+                //return RedirectToAction("Edit", "AuthorsController", new { id = book.AuthorId });
+
+                return RedirectToAction(nameof(AuthorsController.Edit), new { id = book.AuthorId });
             }
             else
             {
@@ -73,14 +76,14 @@ namespace LibraryCult.Controllers
         {
             if (id == null)
             {
-                return RedirectToAction(nameof(ErrorViewModel), new { message = "Id invalid" });
+                return RedirectToAction(nameof(Error), new { message = "Id mismatch." });
             }
 
             var result = _bookService.FindBookId(id.Value);
 
             if (result == null)
             {
-                return RedirectToAction(nameof(ErrorViewModel), new { message = "Book not found" });
+                return RedirectToAction(nameof(Error), new { message = "Book not found." });
             }
 
 
@@ -105,7 +108,7 @@ namespace LibraryCult.Controllers
 
             if (id != book.BookId)
             {
-                throw new Exception("book not found");
+                return RedirectToAction(nameof(Error), new { message = "Book not found." });
             }
 
             _bookService.UpdateBook(book);
@@ -119,7 +122,7 @@ namespace LibraryCult.Controllers
 
             if (result == null)
             {
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction(nameof(Error), new { message = "Book not found" });
             }
 
             var category = _categoryService.AllCategory();
@@ -136,14 +139,14 @@ namespace LibraryCult.Controllers
         {
             if (id == null)
             {
-                throw new Exception("Id is null");
+                return RedirectToAction(nameof(Error), new { message = "Id mismatch." });
             }
 
             var result = _bookService.FindBookId(id.Value);
 
             if (result == null)
             {
-                throw new Exception("Book not found");
+                return RedirectToAction(nameof(Error), new { message = "Book not found" });
             }
 
             var categorys = _categoryService.AllCategory();
@@ -160,12 +163,19 @@ namespace LibraryCult.Controllers
 
             if (result == null)
             {
-                throw new Exception("book not found");
+                return RedirectToAction(nameof(Error), new { message = "Book not found" });
             }
 
             _bookService.RemoveBook(id);
 
             return RedirectToAction(nameof(Index));
+        }
+
+
+        public IActionResult Error (string message)
+        {
+            var viewModel = new ErrorViewModel { Message = message, RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier };
+            return View(viewModel);
         }
     }
 }

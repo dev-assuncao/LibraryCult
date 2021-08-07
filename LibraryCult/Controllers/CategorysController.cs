@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using LibraryCult.Services;
 using LibraryCult.Models.ViewModels;
 using LibraryCult.Models;
+using System.Diagnostics;
 
 namespace LibraryCult.Controllers
 {
@@ -30,17 +31,23 @@ namespace LibraryCult.Controllers
         {
             if (id == null)
             {
-                throw new Exception("Id is null");
+                return RedirectToAction(nameof(Error), new { message = "Id not provided" });
             }
 
             var search = _categoryService.PerCategory(id.Value);
 
             if (search == null)
             {
-                throw new Exception("Category not found");
+                return RedirectToAction(nameof(Error), new { message = "Category not Found" });
             }
 
             var viewModel = new CategoryFormViewModel { Books = search };
+            return View(viewModel);
+        }
+
+        public IActionResult Error(string message)
+        {
+            var viewModel = new ErrorViewModel { Message = message, RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier };
             return View(viewModel);
         }
     }
